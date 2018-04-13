@@ -1,0 +1,11 @@
+<app-wrapper>
+  <div class="center">
+      <a class="btn blue" (click)='buscaCarta ()'>busca carta escolhida</a>
+  </div>
+</app-wrapper>
+<ul>
+  <li *ngFor="let carta of resultSearch">
+    <app-card-wrapper  [card] = "carta"></app-card-wrapper>
+  </li>
+</ul>
+

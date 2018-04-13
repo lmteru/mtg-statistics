@@ -1,0 +1,12 @@
+<br>
+<app-wrapper>
+  <input class="white-text" type="text" #cardNameFld [(ngModel)]="cardName" (blur)="saveSearch(cardNameFld.value)">
+  <p class="black-text">{{ cardName | uppercase}}</p>
+  <br>
+  <!-- <div class="center">
+    <a class="btn green">salva param busca</a>
+  </div> -->
+</app-wrapper>
+
+<app-card-fld></app-card-fld>
+

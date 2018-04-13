@@ -1,0 +1,17 @@
+<app-wrapper>
+  <h4 class="center" [style.color]="getColor()">{{ card.name }}</h4>
+  <!-- <br> -->
+  <p [style.color]="getColor()">ID: {{ card.id }}</p>
+  <!-- <br> -->
+  <!-- <p>TYPES : {{ card.supertypes }} - {{ card.subtypes }}</p> -->
+  <br>
+  <p [style.color]="getColor()">CUSTO: {{ card.manaCost }}</p>
+  <br>
+  <div class="center">
+    <img [src]="card.imageUrl" alt="O proxy é sem graça">
+  </div>
+  <br>
+  <p [style.color]="getColor()">TEXTO: {{ card.text }}</p>
+  <br>
+
+</app-wrapper>
