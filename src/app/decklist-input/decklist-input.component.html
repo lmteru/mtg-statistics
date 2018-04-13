@@ -1,3 +1,13 @@
-<p>
-  decklist-input works!
-</p>
+<div class="container center">
+  <a class="btn">BLUR</a>
+</div>
+
+<div class="row">
+  <div class="row">
+    <div class="input-field col s12">
+      <textarea id="textarea1" class="materialize-textarea" [(ngModel)]="deckStr" (blur)="printDeck()"></textarea>
+      <label for="textarea1">Insira a lista do deck</label>
+    </div>
+  </div>
+</div>
+<br>

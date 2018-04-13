@@ -1,3 +1,4 @@
+import { DeckListService } from './shared/deck-list.service';
 import { VarHoldService } from './shared/var-hold.service';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -34,7 +35,8 @@ import { routing } from './app.routing';
     routing
   ],
   providers: [
-    VarHoldService
+    VarHoldService,
+    DeckListService
   ],
   bootstrap: [AppComponent]
 })

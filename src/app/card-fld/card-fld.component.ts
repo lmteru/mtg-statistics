@@ -22,7 +22,7 @@ export class CardFldComponent implements OnInit {
 
   buscaCarta (){
     this.paraBusca = this.varHold.$toSearch;
-    console.log(this.paraBusca);
+    // console.log(this.paraBusca);
     this.http.get('https://api.magicthegathering.io/v1/cards?name=' + this.paraBusca)
     .map( m => m.json())
     .subscribe(
