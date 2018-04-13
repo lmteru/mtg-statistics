@@ -1,6 +1,7 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { MagicCard } from './MagicCard';
+import 'rxjs/add/operator/map'
 
 @Injectable()
 export class DeckListService {
@@ -64,13 +65,13 @@ export class DeckListService {
         let aux: MagicCard[] = [];
 
         aux = param.cards as MagicCard[];
-
-         this.comanderCard = aux[0];
+        this.comanderCard = aux[0];
        }
     );
+    console.log(this.comanderCard);
   }
 
-  public consolidaLista(){
+  public consolidaLista() {
     let aux: MagicCard;
     let auxCard: {
       qtd: Number,
@@ -80,51 +81,37 @@ export class DeckListService {
       };
 
     let contador = 0;
-    console.log("OLHA AQUI");
-    console.log(this.deckString);
-    console.log("ACABA AQUI");
 
-    for(let i of this.deckString){
+    for( let i of this.deckString ){
 
-      if(!i.includes('LANDS') && !i.includes('CREATURES')
-        && !i.includes('INSTANTS and SORC') && !i.includes('OTHER SPELLS')) {
+      if( !i.includes('LANDS') && !i.includes('CREATURES')
+        && !i.includes('INSTANTS and SORC') && !i.includes('OTHER SPELLS') ) {
+
         auxCard.qtd = Number(i.split(' ')[0]);
 
         i = i.split('').slice(2).join('');
-        console.log(i);
 
         this.http.get('https://api.magicthegathering.io/v1/cards?name=' + i)
-        .map( m => m.json())
-        .subscribe(
-          param => {
-            let aux: MagicCard[] = [];
+         .map( m => m.json())
+         .subscribe(
+           param => {
+             let aux: MagicCard[] = [];
 
-            aux = param.cards as MagicCard[];
+             aux = param.cards as MagicCard[];
 
-            auxCard.card = aux[0];
-            console.log(auxCard);
-          }
-        );
+             auxCard.card = aux[0];
+           }
+         );
 
-        this.deckCard.push(auxCard);
-        console.log(this.deckCard[contador]);
-        contador++;
+         this.deckCard.push(auxCard);
+         console.log(this.deckCard[contador]);
+         contador++;
       }
     }
 
 
 
   }
-
-  // public buscaCarta( toSearch: string ): MagicCard {
-  //   let resultado: MagicCard;
-  //   let aux: MagicCard[] = [];
-
-  //   aux = this.http.get('https://api.magicthegathering.io/v1/cards?name=' + toSearch).map( m=> m.j ) as ;
-
-
-  //   return resultado;
-  // }
 
 
 }
