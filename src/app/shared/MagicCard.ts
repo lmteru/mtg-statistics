@@ -1,3 +1,4 @@
+import { MagicCard } from './MagicCard';
 export interface MagicCard{
 artist?: string,
 cmc?: number,
@@ -21,4 +22,9 @@ source?: string,
 text?: string,
 type?: string,
 types?: string[]
+}
+
+export interface MagicDeck{
+  card?: MagicCard,
+  qntd?: number
 }

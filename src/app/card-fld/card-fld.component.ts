@@ -15,21 +15,20 @@ export class CardFldComponent implements OnInit {
   constructor( private varHold: VarHoldService ,private http: Http ) { }
 
   paraBusca: string;
-  resultSearch:MagicCard[];
+  resultSearch: MagicCard[];
 
   ngOnInit() {
   }
 
   buscaCarta (){
     this.paraBusca = this.varHold.$toSearch;
-    // console.log(this.paraBusca);
+    //
     this.http.get('https://api.magicthegathering.io/v1/cards?name=' + this.paraBusca)
     .map( m => m.json())
     .subscribe(
       param => {
         this.resultSearch = [];
         this.varHold.resultadoBusca = param ;
-        let aux: MagicCard[] = [];
 
         this.resultSearch = param.cards as MagicCard[];
       }

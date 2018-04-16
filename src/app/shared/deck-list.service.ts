@@ -1,6 +1,8 @@
+import { async } from '@angular/core/testing';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { MagicCard } from './MagicCard';
+import { MagicCard, MagicDeck } from './MagicCard';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -8,12 +10,10 @@ export class DeckListService {
 
   private commanderStr: string;
   private comanderCard: MagicCard;
+  resultSearch: MagicCard[];
 
-  private deckString: string[] = [];
-  private deckCard :{
-    qtd: Number,
-    card: MagicCard
-  } [] = [];
+  deckString: string[] = [];
+  deckCard: MagicDeck[] = [];
 
   constructor( private http:Http ) { }
 
@@ -33,85 +33,43 @@ export class DeckListService {
 		this.comanderCard = value;
 	}
 
-	public get $deckString(): string[] {
-		return this.deckString;
-	}
-
-	public set $deckString(value: string[]) {
-		this.deckString = value;
-	}
-
-	public get $deckCard(): {
-    qtd: Number,
-    card: MagicCard } []
-  {
-		return this.deckCard;
-	}
-
-	public set $deckCard(value: {
-    qtd: Number,
-    card: MagicCard } [])
-  {
-		this.deckCard = value;
-  }
-
-  public consolidaComandante(){
-    this.commanderStr = this.commanderStr.split('').slice(2).join('');
-
-    this.http.get('https://api.magicthegathering.io/v1/cards?name=' + this.commanderStr)
-    .map( m => m.json())
-    .subscribe(
-      param => {
-        let aux: MagicCard[] = [];
-
-        aux = param.cards as MagicCard[];
-        this.comanderCard = aux[0];
-       }
-    );
-    console.log(this.comanderCard);
-  }
-
-  public consolidaLista() {
+  async consolidaLista() {
     let aux: MagicCard;
-    let auxCard: {
-      qtd: Number,
-      card: MagicCard } = {
-        qtd: 0,
-        card: {}
-      };
+    let auxCard: MagicDeck;
 
     let contador = 0;
 
     for( let i of this.deckString ){
 
-      if( !i.includes('LANDS') && !i.includes('CREATURES')
+      if( !i.includes('LANDS') && !i.includes('CREATURES') && !i.includes('COMMANDER')
         && !i.includes('INSTANTS and SORC') && !i.includes('OTHER SPELLS') ) {
 
-        auxCard.qtd = Number(i.split(' ')[0]);
+        auxCard = await this.BuscaCarta(i) as MagicDeck;
+        console.log(auxCard);
 
-        i = i.split('').slice(2).join('');
+      }//fim do if
+    }//fim do for
 
-        this.http.get('https://api.magicthegathering.io/v1/cards?name=' + i)
-         .map( m => m.json())
-         .subscribe(
-           param => {
-             let aux: MagicCard[] = [];
+  }//fim do metodo
 
-             aux = param.cards as MagicCard[];
-
-             auxCard.card = aux[0];
-           }
-         );
-
-         this.deckCard.push(auxCard);
-         console.log(this.deckCard[contador]);
-         contador++;
-      }
-    }
+  async BuscaCarta( toSearch: string ): Promise<MagicDeck> {
+    let toReturn: MagicDeck = { qntd: 0, card:{} };
+    let qntd: number;
+    let aux: string [] = [];
 
 
+    aux = toSearch.split(' ');
+    toReturn.qntd = Number(aux[0]);
 
+    aux = aux.slice(1);
+    toSearch = aux.join(' ');
+
+    let found = await this.http.get('https://api.magicthegathering.io/v1/cards?name=' + toSearch).toPromise();
+
+    toReturn.card = found.json().cards[0];
+
+    // console.log(toReturn.card);
+
+    return toReturn;
   }
-
-
 }
