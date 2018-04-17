@@ -1,3 +1,19 @@
-<p>
-  mana-curve works!
-</p>
+<div class="row center">
+  <h3>CURVA DE MANA</h3>
+  <div class="col-md-6">
+    <div style="display: block;">
+    <canvas baseChart width="400" height="200"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+      </canvas>
+    </div>
+  </div>
+
+  <!-- REFERENCIA : http://www.chartjs.org/docs/latest/getting-started/ -->
+</div>
