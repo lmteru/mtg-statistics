@@ -1,8 +1,11 @@
+import { HomePageComponent } from './home-page/home-page.component';
+import { DeckViewComponent } from './deck-view/deck-view.component';
 import { DecklistInputComponent } from './decklist-input/decklist-input.component';
 import { Component, ModuleWithProviders, NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
 
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
+import { ShowStatisticsComponent } from './show-statistics/show-statistics.component';
 
 const appRoutes: Routes = [
   {
@@ -12,6 +15,22 @@ const appRoutes: Routes = [
   {
     path: 'adiconaDeck',
     component: DecklistInputComponent
+  },
+  {
+    path: 'deckView',
+    component: DeckViewComponent
+  },
+  {
+    path: 'deckStatistics',
+    component: ShowStatisticsComponent
+  },
+  {
+    path: '',
+    component: HomePageComponent
+  },
+  {
+    path: '**',
+    component: HomePageComponent
   }
 
 ];

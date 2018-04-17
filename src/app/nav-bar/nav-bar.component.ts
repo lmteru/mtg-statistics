@@ -1,3 +1,4 @@
+import { DeckListService } from './../shared/deck-list.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -118,8 +119,8 @@ export class NavBarComponent implements OnInit {
   'x1tFqfkSBzHplPSIEWpzVhREmUTflz+Xq7nFBluNsWnOL7grdP4sLneH/skWS6Xx+X+8XW//mx2u8P'+
   '5HEerD5N74z9idUQSXivXqgAAAABJRU5ErkJggg==';
 
-  
-  constructor() { }
+
+  constructor( private deckService: DeckListService ) { }
 
   ngOnInit() {
   }

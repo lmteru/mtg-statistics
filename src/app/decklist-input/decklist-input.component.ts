@@ -1,6 +1,7 @@
 import { MagicCard, MagicDeck } from './../shared/MagicCard';
 import { DeckListService } from './../shared/deck-list.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-decklist-input',
@@ -20,7 +21,7 @@ export class DecklistInputComponent implements OnInit {
   render: boolean = false;
 
 
-  constructor( private deckService: DeckListService ) { }
+  constructor( private deckService: DeckListService, private route: Router ) { }
 
 
   ngOnInit() {
@@ -31,19 +32,25 @@ export class DecklistInputComponent implements OnInit {
   }
 
   async printDeck(){
-    this.render = true;
-    // quebra o texto inserido no campo em um array
-    this.arrayDeck = this.deckStr.split('\n');
+    if(this.deckStr!="" && this.deckStr!=' ')
+    {
+      this.render = true;
+      // quebra o texto inserido no campo em um array
+      this.arrayDeck = this.deckStr.split('\n');
 
-    //salva no serviço a decklist
-    this.deckService.deckString = this.arrayDeck;
+      //salva no serviço a decklist
+      this.deckService.deckString = this.arrayDeck;
 
-    //chama o metodo do servico que faz com que transforme o array de string em array de cartas e comandante
-    await this.deckService.consolidaLista();
+      //chama o metodo do servico que faz com que transforme o array de string em array de cartas e comandante
+      await this.deckService.consolidaLista();
 
-    //atualiza a decklist e o comandante
-    this.decklist = this.deckService.deckCard;
-    this.comander = this.deckService.comanderCard;
+      //atualiza a decklist e o comandante
+      this.decklist = this.deckService.deckCard;
+      this.comander = this.deckService.comanderCard;
+
+      //vai para deckView quando acaba de carregar o deck
+      this.route.navigate(['./deckView']);
+    }
   }
 
 }

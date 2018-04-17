@@ -5,7 +5,9 @@
       <ul id="nav-mobile" class="left">
 
         <li><a routerLink='buscaNome' class='black-text'>Buscar por nome</a></li>
-        <li><a routerLink='adiconaDeck' class='black-text'>Adiciona deck</a></li>
+        <li><a routerLink='adiconaDeck' class='black-text' *ngIf='!this.deckService.deckSaved'>Adiciona deck</a></li>
+        <li><a routerLink='deckView' class='black-text' *ngIf='this.deckService.deckSaved'>Visualizar deck</a></li>
+        <li><a routerLink='deckStatistics' class='black-text' *ngIf='this.deckService.deckSaved'>Visualizar Estatisticas</a></li>
 
       </ul>
     </div>

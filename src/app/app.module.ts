@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { MaterializeModule } from 'angular2-materialize';
 import { FormsModule } from '@angular/forms';
 
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
@@ -16,6 +17,11 @@ import { DecklistInputComponent } from './decklist-input/decklist-input.componen
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { routing } from './app.routing';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { DeckViewComponent } from './deck-view/deck-view.component';
+import { StatisticsService } from './shared/statistics.service';
+import { ShowStatisticsComponent } from './show-statistics/show-statistics.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { ManaCurveComponent } from './mana-curve/mana-curve.component';
 
 
 @NgModule({
@@ -27,18 +33,24 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     CardWrapperComponent,
     DecklistInputComponent,
     NavBarComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    DeckViewComponent,
+    ShowStatisticsComponent,
+    HomePageComponent,
+    ManaCurveComponent
   ],
   imports: [
     BrowserModule,
     MaterializeModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    ChartsModule
   ],
   providers: [
     VarHoldService,
-    DeckListService
+    DeckListService,
+    StatisticsService
   ],
   bootstrap: [AppComponent]
 })
