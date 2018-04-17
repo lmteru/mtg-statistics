@@ -1,12 +1,16 @@
+<h3>SIMBOLOS</h3>
+<br>
 <div class="row">
     <div class="col-md-6">
         <div style="display: block">
-          <canvas baseChart
-                  [datasets]="radarChartData"
-                  [labels]="radarChartLabels"
-                  [chartType]="radarChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
-        </div>
+            <canvas baseChart
+                    [data]="polarAreaChartData"
+                    [labels]="polarAreaChartLabels"
+                    [legend]="polarAreaLegend"
+                    [colors]="ChartColors"
+                    [chartType]="polarAreaChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
     </div>
   </div>

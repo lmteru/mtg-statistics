@@ -22,7 +22,6 @@ import { StatisticsService } from './shared/statistics.service';
 import { ShowStatisticsComponent } from './show-statistics/show-statistics.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ManaCurveComponent } from './mana-curve/mana-curve.component';
-import { CmcSimbolosComponent } from './cmc-simbolos/cmc-simbolos.component';
 import { RadialGraphComponent } from './radial-graph/radial-graph.component';
 
 
@@ -40,7 +39,6 @@ import { RadialGraphComponent } from './radial-graph/radial-graph.component';
     ShowStatisticsComponent,
     HomePageComponent,
     ManaCurveComponent,
-    CmcSimbolosComponent,
     RadialGraphComponent
   ],
   imports: [
