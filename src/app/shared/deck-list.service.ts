@@ -8,36 +8,23 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class DeckListService {
 
-  private commanderStr: string;
-  private comanderCard: MagicCard;
+  comanderCard: MagicCard;
   resultSearch: MagicCard[];
 
   deckString: string[] = [];
   deckCard: MagicDeck[] = [];
 
+  progressBar: number = 0;
+  deckSaved: boolean = false;
+
   constructor( private http:Http ) { }
-
-	public get $commanderStr(): string {
-		return this.commanderStr;
-	}
-
-	public set $commanderStr(value: string) {
-		this.commanderStr = value;
-	}
-
-	public get $comanderCard(): MagicCard {
-		return this.comanderCard;
-	}
-
-	public set $comanderCard(value: MagicCard) {
-		this.comanderCard = value;
-	}
 
   async consolidaLista() {
     let aux: MagicCard;
     let auxCard: MagicDeck;
 
-    let contador = 0;
+    let contador: number = 0;
+    let tam: number = this.deckString.length;
 
     for( let i of this.deckString ){
 
@@ -45,11 +32,18 @@ export class DeckListService {
         && !i.includes('INSTANTS and SORC') && !i.includes('OTHER SPELLS') ) {
 
         auxCard = await this.BuscaCarta(i) as MagicDeck;
-        console.log(auxCard);
-
-      }//fim do if
+        this.deckCard.push(auxCard);
+        // console.log(auxCard);
+        contador++;
+        this.progressBar = Math.floor( (contador / tam) * 100 );
+      } else {
+        tam--;
+      }
     }//fim do for
 
+    this.arrumaDeck();
+    if(this.deckString.length > 0)
+      this.deckSaved = true;
   }//fim do metodo
 
   async BuscaCarta( toSearch: string ): Promise<MagicDeck> {
@@ -68,8 +62,16 @@ export class DeckListService {
 
     toReturn.card = found.json().cards[0];
 
-    // console.log(toReturn.card);
-
     return toReturn;
+  }
+
+
+  private arrumaDeck() {
+    this.comanderCard = this.deckCard[0].card;
+
+    this.deckCard = this.deckCard.slice(1);
+
+    console.log(this.deckCard);
+    console.log(this.comanderCard);
   }
 }

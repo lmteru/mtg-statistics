@@ -1,5 +1,7 @@
 <div class="container center">
   <a class="btn">BLUR</a>
+  <app-progress-bar [pct]="pct" *ngIf="render"></app-progress-bar>
+  <h3 *ngIf="render">{{ pct }} %</h3>
 </div>
 
 <div class="row">
@@ -12,6 +14,31 @@
 </div>
 <br>
 
-<app-wrapper>
-  <h4>{{ decklist }}</h4>
-</app-wrapper>
+<!-- <app-wrapper *ngIf = "this.deckService.deckSaved">
+  <table>
+    <thead>
+      <tr>
+        <th>QNTD</th>
+        <th>CARD NAME</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th></th>
+        <th>COMANDANTE</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>{{ comander.name }}</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>DECK BODY</th>
+      </tr>
+      <tr *ngFor = "let i of decklist">
+        <th>{{ i.qntd }}</th>
+        <th><app-card-wrapper [card]='i.card' ></app-card-wrapper></th>
+      </tr>
+    </tbody>
+  </table>
+</app-wrapper> -->

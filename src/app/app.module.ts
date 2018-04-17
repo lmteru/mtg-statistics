@@ -15,6 +15,7 @@ import { CardWrapperComponent } from './card-wrapper/card-wrapper.component';
 import { DecklistInputComponent } from './decklist-input/decklist-input.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { routing } from './app.routing';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { routing } from './app.routing';
     CardFldComponent,
     CardWrapperComponent,
     DecklistInputComponent,
-    NavBarComponent
+    NavBarComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,

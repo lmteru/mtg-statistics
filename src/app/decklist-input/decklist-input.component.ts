@@ -12,7 +12,12 @@ export class DecklistInputComponent implements OnInit {
   deckStr: string;
   arrayDeck: string[];
   commanderStr: string;
+
   decklist: MagicDeck[];
+  comander: MagicCard;
+
+  pct:number = 0;
+  render: boolean = false;
 
 
   constructor( private deckService: DeckListService ) { }
@@ -20,20 +25,25 @@ export class DecklistInputComponent implements OnInit {
 
   ngOnInit() {
     const k = setInterval( k => {
-      this.decklist = this.deckService.deckCard;
+      this.pct = this.deckService.progressBar;
     }
     , 1 );
   }
 
-  printDeck(){
+  async printDeck(){
+    this.render = true;
     // quebra o texto inserido no campo em um array
     this.arrayDeck = this.deckStr.split('\n');
 
-    //separa o comandante do resto do array e salva no serviço
+    //salva no serviço a decklist
     this.deckService.deckString = this.arrayDeck;
 
-    //chama o metodo do servico que faz com que transforme o array de string em cartas
-    this.deckService.consolidaLista();
+    //chama o metodo do servico que faz com que transforme o array de string em array de cartas e comandante
+    await this.deckService.consolidaLista();
+
+    //atualiza a decklist e o comandante
+    this.decklist = this.deckService.deckCard;
+    this.comander = this.deckService.comanderCard;
   }
 
 }
