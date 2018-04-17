@@ -23,6 +23,7 @@ import { ShowStatisticsComponent } from './show-statistics/show-statistics.compo
 import { HomePageComponent } from './home-page/home-page.component';
 import { ManaCurveComponent } from './mana-curve/mana-curve.component';
 import { RadialGraphComponent } from './radial-graph/radial-graph.component';
+import { TipoCartaComponent } from './tipo-carta/tipo-carta.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { RadialGraphComponent } from './radial-graph/radial-graph.component';
     ShowStatisticsComponent,
     HomePageComponent,
     ManaCurveComponent,
-    RadialGraphComponent
+    RadialGraphComponent,
+    TipoCartaComponent
   ],
   imports: [
     BrowserModule,

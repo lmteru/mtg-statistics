@@ -58,7 +58,7 @@ export class ManaCurveComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  public lineChartLegend:boolean = true;
+  public lineChartLegend:boolean = false;
   public lineChartType:string = 'bar';
 
   // events
