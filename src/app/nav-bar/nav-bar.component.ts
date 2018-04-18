@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
+  deckSaved: boolean;
 
   imgUrl: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOM'+
   'AAADeCAMAAAD4tEcNAAAAgVBMVEWCaTv///+AZjZ+ZDN9Yi9/ZTV9YzB7YCt6Xyl6Xi'+
@@ -123,6 +124,10 @@ export class NavBarComponent implements OnInit {
   constructor( private deckService: DeckListService ) { }
 
   ngOnInit() {
+    const m = setInterval( m => {
+        this.deckSaved = this.deckService.deckSaved;
+      }
+    , 1 );
   }
 
 }

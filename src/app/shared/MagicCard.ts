@@ -21,7 +21,8 @@ setName?: string,
 source?: string,
 text?: string,
 type?: string,
-types?: string[]
+types?: string[],
+imageUrl?: string
 }
 
 export interface MagicDeck{
