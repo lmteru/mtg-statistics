@@ -1,17 +1,35 @@
-
-<h6>CMC TOTAL </h6>
-<p>{{ cmcTotal }}</p>
+<app-wrapper>
+  <div class='container center'>
+    <h6>CMC TOTAL </h6>
+    <p>{{ cmcTotal }}</p>
+    <br>
+    <h6>CMC MÉDIO</h6>
+    <p>{{ cmcMedio | number:'1.0-2' }}</p>
+    <br>
+    <h6>TOTAL DE CARTAS</h6>
+    <p>{{ total }}</p>
+  </div>
+</app-wrapper>
 <br>
 
-<h6>CMC MÉDIO</h6>
-<p>{{ cmcMedio | number:'1.0-2' }}</p>
+<app-wrapper>
+
+    <app-mana-curve></app-mana-curve>
+  <br>
+</app-wrapper>
 <br>
-<app-mana-curve></app-mana-curve>
+
+<app-wrapper>
+
+    <app-radial-graph></app-radial-graph>
+  <br>
+</app-wrapper>
+
 <br>
-<br>
-<app-radial-graph></app-radial-graph>
-<br>
-<br>
-<app-tipo-carta></app-tipo-carta>
-<br>
+
+<app-wrapper>
+
+    <app-tipo-carta></app-tipo-carta>
+  <br>
+</app-wrapper>
 <br>

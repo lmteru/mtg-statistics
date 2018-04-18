@@ -20,4 +20,14 @@ export class StatisticsService {
     return this.cmcTotal() / 99;
   }
 
+  public totalCards(): number{
+    let total: number = 0;
+
+    for(let i of this.deckService.deckCard){
+      total += i.qntd;
+    }
+
+    return total;
+  }
+
 }

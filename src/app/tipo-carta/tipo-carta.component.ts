@@ -22,7 +22,12 @@ export class TipoCartaComponent implements OnInit {
 
   public radarChartType: string = 'radar';
 
-  public colors: Color = {backgroundColor: '#000000'};
+  public colors: Array<any> = [
+    {
+      borderColor: 'rgba(76, 76, 76, 1)',
+      backgroundColor: 'rgba(0, 0, 25, 0.75)'
+    }
+  ];
 
   // events
   public chartClicked(e: any): void {

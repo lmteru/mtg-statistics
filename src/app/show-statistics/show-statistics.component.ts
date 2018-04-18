@@ -12,10 +12,12 @@ export class ShowStatisticsComponent implements OnInit {
 
   cmcTotal: number;
   cmcMedio: number;
+  total:number;
 
   ngOnInit() {
     this.cmcTotal = this.statistics.cmcTotal();
     this.cmcMedio = this.statistics.cmcMedio();
+    this.total = this.statistics.totalCards();
   }
 
 }

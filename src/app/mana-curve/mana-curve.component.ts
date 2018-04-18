@@ -34,7 +34,7 @@ export class ManaCurveComponent implements OnInit {
   };
   public lineChartColors:Array<any> = [
     { // cor de fundo do quadrado
-      backgroundColor: '#c2d6d6',
+      backgroundColor: 'rgba(0, 0, 25, 0.75)',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#fff',

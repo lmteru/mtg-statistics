@@ -1,10 +1,11 @@
-<div class="container">
+<div class="container center">
   <h3>TIPO DE CARTA</h3>
   <div style="display: block">
     <canvas baseChart
             [datasets]="radarChartData"
             [labels]="radarChartLabels"
             [legend]='false'
+            [colors]='colors'
             [chartType]="radarChartType"
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)">
