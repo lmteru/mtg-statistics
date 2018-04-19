@@ -1,1 +1,4 @@
-
+#idFld {
+  max-width: 200px;
+  overflow: auto;
+}

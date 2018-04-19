@@ -36,8 +36,11 @@ export class DeckListService {
         // console.log(auxCard);
         contador++;
         this.progressBar = Math.floor( (contador / tam) * 100 );
+
       } else {
+
         tam--;
+
       }
     }//fim do for
 

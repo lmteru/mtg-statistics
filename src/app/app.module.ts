@@ -24,6 +24,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ManaCurveComponent } from './mana-curve/mana-curve.component';
 import { RadialGraphComponent } from './radial-graph/radial-graph.component';
 import { TipoCartaComponent } from './tipo-carta/tipo-carta.component';
+import { LandsComponent } from './teste/lands/lands.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { TipoCartaComponent } from './tipo-carta/tipo-carta.component';
     HomePageComponent,
     ManaCurveComponent,
     RadialGraphComponent,
-    TipoCartaComponent
+    TipoCartaComponent,
+    LandsComponent
   ],
   imports: [
     BrowserModule,
