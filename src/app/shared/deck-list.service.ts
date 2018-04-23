@@ -13,9 +13,12 @@ export class DeckListService {
 
   deckString: string[] = [];
   deckCard: MagicDeck[] = [];
+  deckLands: MagicDeck[] = [];
 
   progressBar: number = 0;
   deckSaved: boolean = false;
+
+
 
   constructor( private http:Http ) { }
 
@@ -70,11 +73,18 @@ export class DeckListService {
 
 
   private arrumaDeck() {
+
     this.comanderCard = this.deckCard[0].card;
 
     this.deckCard = this.deckCard.slice(1);
 
+    for(let land of this.deckCard){
+      if(land.card.type.toLowerCase().includes('land'))
+        this.deckLands.push(land);
+    }
+
     console.log(this.deckCard);
     console.log(this.comanderCard);
+    console.log(this.deckLands);
   }
 }

@@ -1,15 +1,13 @@
-<br>
-<div *ngIf='k' class="black">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
-<br>
-<p>
-  {{ txtOut }}
-</p>
-<br>
 <div class="container center">
-  <a class='btn black' (click)='Rodada()'> teste </a>
+  <h3>LAND COLORS</h3>
 </div>
-
-<div class="input-field col s6">
-  <textarea id="textarea1" class="materialize-textarea" [(ngModel)]='landsIn' ></textarea>
+<div style="display: block">
+  <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"
+              [colors]="ChartColors"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
 </div>
 
