@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CustoCoresComponent } from './custo-cores';
 
-import { RadialGraphComponent } from './radial-graph.component';
 
 describe('RadialGraphComponent', () => {
-  let component: RadialGraphComponent;
-  let fixture: ComponentFixture<RadialGraphComponent>;
+  let component: CustoCoresComponent;
+  let fixture: ComponentFixture<CustoCoresComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RadialGraphComponent ]
+      declarations: [ CustoCoresComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RadialGraphComponent);
+    fixture = TestBed.createComponent(CustoCoresComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

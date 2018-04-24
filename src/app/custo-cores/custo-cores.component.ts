@@ -4,20 +4,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Color } from 'ng2-charts';
 
 @Component({
-  selector: 'app-radial-graph',
-  templateUrl: './radial-graph.component.html',
-  styleUrls: ['./radial-graph.component.css']
+  selector: 'app-custo-cores',
+  templateUrl: './custo-cores.component.html',
+  styleUrls: ['./custo-cores.component.css']
 })
-export class RadialGraphComponent implements OnInit {
-
-  // Radar
-  // public radarChartLabels: string[] = ["BRANCO", 'AZUL', 'PRETO', 'VERMELHO', 'VERDE'];
-
-  // public radarChartData:any[] = [
-  //   {data: [0, 0, 0, 0, 0], label: 'Series A'}
-  // ];
-
-  // public radarChartType: string = 'radar';
+export class CustoCoresComponent implements OnInit {
 
   public polarAreaChartLabels: string[] = ['BRANCO', 'AZUL', 'PRETO', 'VERMELHO', 'VERDE'];
   public polarAreaChartData: Array<number>[] = [
@@ -33,11 +24,26 @@ export class RadialGraphComponent implements OnInit {
   public polarAreaChartType: string = 'polarArea';
 
   public ChartColors: Color[] = [ //'#ffff66','#0033cc','#000000','#ff0000','#00cc00'
-    { backgroundColor: '#ffff66' },
-    { backgroundColor: '#0033cc' },
-    { backgroundColor: '#000000' },
-    { backgroundColor: '#ff0000' },
-    { backgroundColor: '#00cc00' }
+    {
+      backgroundColor: 'rgba(255, 255, 102, 0.5)',
+      borderColor: 'rgba(255, 255, 102, 1)'
+    },
+    {
+      backgroundColor: 'rgba(0, 51, 204, 0.5)',
+      borderColor: 'rgba(0, 51, 204, 1)'
+    },
+    {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      borderColor: 'rgba(0, 0, 0, 1)'
+    },
+    {
+      backgroundColor: 'rgba(255, 0, 0, 0.5)',
+      borderColor: 'rgba(255, 0, 0, 1)'
+    },
+    {
+      backgroundColor: 'rgba(0, 204, 0, 1)',
+      borderColor: 'rgba(0, 204, 0, 1)'
+    }
   ];
 
   constructor(public deckService: DeckListService) { }

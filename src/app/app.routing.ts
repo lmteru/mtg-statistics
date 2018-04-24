@@ -3,7 +3,6 @@ import { DeckViewComponent } from './deck-view/deck-view.component';
 import { DecklistInputComponent } from './decklist-input/decklist-input.component';
 import { Component, ModuleWithProviders, NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
-
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { ShowStatisticsComponent } from './show-statistics/show-statistics.component';
 import { LandsComponent } from './lands/lands.component';

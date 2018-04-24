@@ -3,13 +3,11 @@
     <div class="nav-wrapper white">
       <a href="#" class="brand-logo right"><img [src]="imgUrl" alt="alt text" height="50px" width="50px"></a>
       <ul id="nav-mobile" class="left">
-
-        <li><a routerLink='buscaNome' class='black-text'>Buscar por nome</a></li>
-        <!-- <li><a routerLink='TestaLands' class='black-text'>Testa Lands</a></li> -->
-        <li><a routerLink='adiconaDeck' class='black-text' *ngIf='!deckSaved'>Adiciona deck</a></li>
-        <li><a routerLink='deckView' class='black-text' *ngIf='deckSaved'>Visualizar deck</a></li>
-        <li><a routerLink='deckStatistics' class='black-text' *ngIf='deckSaved'>Visualizar Estatisticas</a></li>
-
+        <li><a routerLink='' class='black-text'>HOME</a></li>
+        <li><a routerLink='buscaNome' class='black-text'>BUSCAR POR NOME</a></li>
+        <li><a routerLink='adiconaDeck' class='black-text' *ngIf='!deckSaved'>ADICIONAR DECK</a></li>
+        <li><a routerLink='deckView' class='black-text' *ngIf='deckSaved'>VISUALIZAR DECK</a></li>
+        <li><a routerLink='deckStatistics' class='black-text' *ngIf='deckSaved'>VISUALIZAR ESTATISTICAS</a></li>
       </ul>
     </div>
   </nav>

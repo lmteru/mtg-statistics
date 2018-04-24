@@ -1,15 +1,15 @@
 <app-wrapper>
 
   <h4 class="center black-text">{{ card.name }}</h4>
-  <!-- <br>[style.color]="getColor()" -->
-  <p class="black-text" id="idFld">ID: {{ card.id }}</p>
-  <!-- <br> -->
-  <!-- <p>TYPES : {{ card.supertypes }} - {{ card.subtypes }}</p> -->
-  <br>
-  <p class="black-text">CUSTO: {{ card.manaCost }}</p>
-  <br>
+  <div class="container center">
+    <ng-content></ng-content>
+  </div>
+  <p class="black-text" id="idFld" *ngIf='isRenderId'>ID: {{ card.id }}</p>
+  <br *ngIf='isRenderId'>
+  <p class="black-text" *ngIf='!isLand'>CUSTO: {{ card.manaCost }}</p>
+  <br *ngIf='!isLand'>
   <div class="center black-text">
-    <img [src]="card.imageUrl" alt="O proxy é sem graça">
+    <img [src]="card.imageUrl" alt="Image not Found">
   </div>
   <br>
   <p class="black-text">TEXTO: {{ card.text }}</p>

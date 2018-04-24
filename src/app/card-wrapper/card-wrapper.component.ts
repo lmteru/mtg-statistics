@@ -11,11 +11,15 @@ export class CardWrapperComponent implements OnInit {
   @Input() card: MagicCard;
 
   cardColor: string;
+  isLand: boolean;
+  isRenderId: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-    // console.log(this.card);
+    //check isLand
+    this.isLand = this.card.type.toLowerCase().includes('land');
+
     if(this.card.colors != undefined){
 
       if(this.card.colors.length==1){

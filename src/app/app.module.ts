@@ -1,3 +1,5 @@
+import { CustoCoresComponent } from './custo-cores/custo-cores.component';
+
 import { DeckListService } from './shared/deck-list.service';
 import { VarHoldService } from './shared/var-hold.service';
 import { HttpModule } from '@angular/http';
@@ -22,7 +24,7 @@ import { StatisticsService } from './shared/statistics.service';
 import { ShowStatisticsComponent } from './show-statistics/show-statistics.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ManaCurveComponent } from './mana-curve/mana-curve.component';
-import { RadialGraphComponent } from './radial-graph/radial-graph.component';
+
 import { TipoCartaComponent } from './tipo-carta/tipo-carta.component';
 import { LandsComponent } from './lands/lands.component';
 
@@ -41,7 +43,7 @@ import { LandsComponent } from './lands/lands.component';
     ShowStatisticsComponent,
     HomePageComponent,
     ManaCurveComponent,
-    RadialGraphComponent,
+    CustoCoresComponent,
     TipoCartaComponent,
     LandsComponent
   ],

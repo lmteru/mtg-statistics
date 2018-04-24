@@ -23,13 +23,27 @@ export class LandsComponent implements OnInit {
   size: number = 0;
   acc: number = 0;
 
-  public ChartColors: Color[] = [
-    { backgroundColor: '#ffff66' },
-    { backgroundColor: '#0033cc' },
-    { backgroundColor: '#000000' },
-    { backgroundColor: '#ff0000' },
-    { backgroundColor: '#00cc00' },
-    { backgroundColor: '#c2c2a3' }
+  public ChartColors: Color[] = [ //'#ffff66','#0033cc','#000000','#ff0000','#00cc00'
+    {
+      backgroundColor: 'rgba(255, 255, 102, 0.5)',
+      borderColor: 'rgba(255, 255, 102, 1)'
+    },
+    {
+      backgroundColor: 'rgba(0, 51, 204, 0.5)',
+      borderColor: 'rgba(0, 51, 204, 1)'
+    },
+    {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      borderColor: 'rgba(0, 0, 0, 1)'
+    },
+    {
+      backgroundColor: 'rgba(255, 0, 0, 0.5)',
+      borderColor: 'rgba(255, 0, 0, 1)'
+    },
+    {
+      backgroundColor: 'rgba(0, 204, 0, 1)',
+      borderColor: 'rgba(0, 204, 0, 1)'
+    }
   ];
 
   // Doughnut

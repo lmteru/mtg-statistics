@@ -1,29 +1,10 @@
 <br>
-<!-- <app-wrapper> -->
-    <table class="centered highlight black-text">
-      <!-- <thead>
-        <tr>
-          <th>QNTD</th>
-          <th>CARD NAME</th>
-        </tr>
-      </thead> -->
-      <tbody >
-        <tr>
-          <th></th>
-          <th>COMANDANTE</th>
-        </tr>
-        <tr>
-          <th></th>
-          <th><app-card-wrapper [card]='comander' ></app-card-wrapper></th>
-        </tr>
-        <tr>
-          <th></th>
-          <th>DECK BODY</th>
-        </tr>
-        <tr *ngFor = "let i of decklist">
-          <th>{{ i.qntd }}   >>>>>></th>
-          <th><app-card-wrapper [card]='i.card' ></app-card-wrapper></th>
-        </tr>
-      </tbody>
-    </table>
-  <!-- </app-wrapper> -->
+<div class="">
+  <div #comandante>
+      <app-card-wrapper [card]='comander' ></app-card-wrapper>
+  </div>
+  <br>
+  <div *ngFor = "let i of decklist">
+    <app-card-wrapper [card]='i.card'>{{ i.qntd }}</app-card-wrapper>
+  </div>
+</div>

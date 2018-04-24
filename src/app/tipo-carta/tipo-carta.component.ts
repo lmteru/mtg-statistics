@@ -17,15 +17,16 @@ export class TipoCartaComponent implements OnInit {
 
   public radarChartData: any = [{
     data: [0, 0, 0, 0, 0, 0, 0],
-    label: 'Series A'
+    label: 'Quantidade'
   }];
 
   public radarChartType: string = 'radar';
 
   public colors: Array<any> = [
     {
-      borderColor: 'rgba(76, 76, 76, 1)',
-      backgroundColor: 'rgba(0, 0, 25, 0.75)'
+      borderColor: 'rgba(0, 0, 0, 0.5)',
+      backgroundColor: 'rgba(0, 0, 25, 0.3)',
+      pointBackgroundColor: 'rgba(0, 0, 0, 1)'
     }
   ];
 
