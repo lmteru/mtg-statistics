@@ -6,7 +6,7 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { ShowStatisticsComponent } from './show-statistics/show-statistics.component';
-import { LandsComponent } from './teste/lands/lands.component';
+import { LandsComponent } from './lands/lands.component';
 
 const appRoutes: Routes = [
   {

@@ -24,7 +24,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ManaCurveComponent } from './mana-curve/mana-curve.component';
 import { RadialGraphComponent } from './radial-graph/radial-graph.component';
 import { TipoCartaComponent } from './tipo-carta/tipo-carta.component';
-import { LandsComponent } from './teste/lands/lands.component';
+import { LandsComponent } from './lands/lands.component';
 
 
 @NgModule({

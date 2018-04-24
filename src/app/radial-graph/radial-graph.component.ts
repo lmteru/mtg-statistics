@@ -48,7 +48,7 @@ export class RadialGraphComponent implements OnInit {
 
 
     for (let i of this.deckService.deckCard) {
-      console.log(i);
+      // console.log(i);
       try {
         if (!i.card.type.includes('Land')) {
           auxArray = i.card.manaCost.split('');
@@ -71,18 +71,18 @@ export class RadialGraphComponent implements OnInit {
 
 
       } catch (Exception) {
-        console.log("Deu erro");
+        // console.log("Deu erro");
       }
     }//fim do for de cartas
   }
 
   // events
   public chartClicked(e: any): void {
-    console.log(e);
+    // console.log(e);
   }
 
   public chartHovered(e: any): void {
-    console.log(e);
+    // console.log(e);
   }
 
 

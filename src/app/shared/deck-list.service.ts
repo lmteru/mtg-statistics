@@ -74,6 +74,7 @@ export class DeckListService {
 
   private arrumaDeck() {
 
+    //coloca o comandante na variavel
     this.comanderCard = this.deckCard[0].card;
 
     this.deckCard = this.deckCard.slice(1);
@@ -83,8 +84,8 @@ export class DeckListService {
         this.deckLands.push(land);
     }
 
-    console.log(this.deckCard);
-    console.log(this.comanderCard);
-    console.log(this.deckLands);
+    // console.log(this.deckCard);
+    // console.log(this.comanderCard);
+    // console.log(this.deckLands);
   }
 }

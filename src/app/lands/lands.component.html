@@ -1,12 +1,13 @@
 <div class="container center">
-  <h3>LAND COLORS</h3>
+  <h3>TERRENOS POR COR</h3>
 </div>
 <div style="display: block">
   <canvas baseChart
               [data]="doughnutChartData"
               [labels]="doughnutChartLabels"
+              [legend]='false'
               [chartType]="doughnutChartType"
-              [colors]="ChartColors"
+              [colors]='ChartColors'
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"></canvas>
 </div>

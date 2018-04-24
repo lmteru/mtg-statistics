@@ -15,7 +15,7 @@ export class CardWrapperComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.card);
+    // console.log(this.card);
     if(this.card.colors != undefined){
 
       if(this.card.colors.length==1){

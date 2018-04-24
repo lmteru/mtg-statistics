@@ -1,9 +1,10 @@
 import { Color } from 'ng2-charts';
-import { DeckListService } from './../../shared/deck-list.service';
 import { Http } from '@angular/http';
-import { MagicDeck, MagicCard } from './../../shared/MagicCard';
 import { Component, OnInit } from '@angular/core';
 import { getPluralCategory } from '@angular/common/src/i18n/localization';
+
+import { MagicDeck, MagicCard } from './../shared/MagicCard';
+import { DeckListService } from './../shared/deck-list.service';
 
 @Component({
   selector: 'app-lands',
@@ -27,13 +28,14 @@ export class LandsComponent implements OnInit {
     { backgroundColor: '#0033cc' },
     { backgroundColor: '#000000' },
     { backgroundColor: '#ff0000' },
-    { backgroundColor: '#00cc00' }
+    { backgroundColor: '#00cc00' },
+    { backgroundColor: '#c2c2a3' }
   ];
 
   // Doughnut
   public doughnutChartLabels:string[] = ['White', 'Blue', 'Black', 'Red', 'Green', 'Colorless'];
-  public doughnutChartData:number[] = [];
-  public doughnutChartType:string = 'doughnut';
+  public doughnutChartData:Array<number[]> = [];
+  public doughnutChartType:string = 'polarArea';
 
   async ngOnInit() {
     this.Rodada();
@@ -111,8 +113,8 @@ export class LandsComponent implements OnInit {
         if( asw[i].toLowerCase().includes('{c}') && acumulador.length <= 0 ) {
           acumulador='C';
         }
-        console.log("acumulador");
-        console.log(acumulador);
+        // console.log("acumulador");
+        // console.log(acumulador);
         aswOut=acumulador.toLowerCase();
         acumulador='';
       }
@@ -127,71 +129,103 @@ export class LandsComponent implements OnInit {
     let landAux: string[];
     this.k=!this.k;
 
+    let colorId: string = '';
 
-    let symbolCount: number[] = [ 0, 0, 0, 0, 0, 0 ];
+    for (let i of this.deckList.comanderCard.colorIdentity){
+      colorId += i;
+    }
+
+
+    let symbolCount: Array<number[]> = [
+      [ 0, 0, 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0, 0, 0 ]
+    ];
 
     landsDaRodada = this.deckList.deckLands;
 
     for(let i of landsDaRodada) {
       if(!i.card.type.toLowerCase().includes('basic') ) {
         textos = this.toRelevantText(i.card.text);
-        console.log(i.card.name);
-        console.log('textos');
-        console.log(textos);
+        // console.log(i.card.name);
+        // console.log('textos');
+        // console.log(textos);
 
         if(textos != undefined) {
           if(textos.includes('w')){
-            symbolCount[0]+=i.qntd;
+            symbolCount[0][0]+=i.qntd;
           }
           if(textos.includes('u')){
-            symbolCount[1]+=i.qntd;
+            symbolCount[1][1]+=i.qntd;
           }
           if(textos.includes('b')){
-            symbolCount[2]+=i.qntd;
+            symbolCount[2][2]+=i.qntd;
           }
           if(textos.includes('r')){
-            symbolCount[3]+=i.qntd;
+            symbolCount[3][3]+=i.qntd;
           }
           if(textos.includes('g')){
-            symbolCount[4]+=i.qntd;
+            symbolCount[4][4]+=i.qntd;
           }
           if(textos.includes('c')){
-            symbolCount[5]+=i.qntd;
+            symbolCount[5][5]+=i.qntd;
           }
           if(textos.includes('any')){
-            symbolCount[0]+=i.qntd;
-            symbolCount[1]+=i.qntd;
-            symbolCount[2]+=i.qntd;
-            symbolCount[3]+=i.qntd;
-            symbolCount[4]+=i.qntd;
+            symbolCount[0][0]+=i.qntd;
+            symbolCount[1][1]+=i.qntd;
+            symbolCount[2][2]+=i.qntd;
+            symbolCount[3][3]+=i.qntd;
+            symbolCount[4][4]+=i.qntd;
           }
         }
 
       }else{
         if(i.card.name.toLowerCase().includes('plains')){
-          symbolCount[0]+=i.qntd;
+          symbolCount[0][0]+=i.qntd;
         }
         if(i.card.name.toLowerCase().includes('island')){
-          symbolCount[1]+=i.qntd;
+          symbolCount[1][1]+=i.qntd;
         }
         if(i.card.name.toLowerCase().includes('swamp')){
-          symbolCount[2]+=i.qntd;
+          symbolCount[2][2]+=i.qntd;
         }
         if(i.card.name.toLowerCase().includes('mountain')){
-          symbolCount[3]+=i.qntd;
+          symbolCount[3][3]+=i.qntd;
         }
         if(i.card.name.toLowerCase().includes('forest')){
-          symbolCount[4]+=i.qntd;
+          symbolCount[4][4]+=i.qntd;
         }
         if(i.card.name.toLowerCase().includes('waste')){
-          symbolCount[5]+=i.qntd;
+          symbolCount[5][5]+=i.qntd;
         }
-        console.log('symCont');
-        console.log(symbolCount);
+        // console.log('symCont');
+        // console.log(symbolCount);
       }
     }// fim do for
     this.doughnutChartData = symbolCount;
-    console.log(symbolCount);
+
+    // alert(colorId);
+    if(!colorId.toLowerCase().includes('w')){
+      symbolCount[0][0]=0;
+    }
+    if(!colorId.toLowerCase().includes('u')){
+      symbolCount[1][1]=0;
+    }
+    if(!colorId.toLowerCase().includes('b')){
+      symbolCount[2][2]=0;
+    }
+    if(!colorId.toLowerCase().includes('r')){
+      symbolCount[3][3]=0;
+    }
+    if(!colorId.toLowerCase().includes('g')){
+      symbolCount[4][4]=0;
+    }
+
+
+    // console.log(symbolCount);
   }
 
   public getPct():number {
