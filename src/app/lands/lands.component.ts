@@ -1,10 +1,8 @@
 import { Color } from 'ng2-charts';
 import { Http } from '@angular/http';
-import { Component, OnInit } from '@angular/core';
-import { getPluralCategory } from '@angular/common/src/i18n/localization';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { MagicDeck, MagicCard } from './../shared/MagicCard';
-import { DeckListService } from './../shared/deck-list.service';
 
 @Component({
   selector: 'app-lands',
@@ -13,15 +11,10 @@ import { DeckListService } from './../shared/deck-list.service';
 })
 export class LandsComponent implements OnInit {
 
-  constructor( private http: Http, private deckList: DeckListService ) { }
+  constructor( ) { }
 
-  txtOut: string = '';
-  landsIn: string = '';
-  k = false;
-
-  pct: number = 0;
-  size: number = 0;
-  acc: number = 0;
+  @Input( 'landsInput' ) landsInput: MagicDeck[];
+  @Input( 'colorId' ) colorId: string;
 
   public ChartColors: Color[] = [ //'#ffff66','#0033cc','#000000','#ff0000','#00cc00'
     {
@@ -41,8 +34,12 @@ export class LandsComponent implements OnInit {
       borderColor: 'rgba(255, 0, 0, 1)'
     },
     {
-      backgroundColor: 'rgba(0, 204, 0, 1)',
+      backgroundColor: 'rgba(0, 204, 0, 0.5)',
       borderColor: 'rgba(0, 204, 0, 1)'
+    },
+    {
+      backgroundColor: 'rgba(250, 250, 250, 0.7)',
+      borderColor: 'rgba(195, 195, 195, 1)'
     }
   ];
 
@@ -54,34 +51,6 @@ export class LandsComponent implements OnInit {
   async ngOnInit() {
     this.Rodada();
    }
-
-  async BuscaLandsRnd( ): Promise<MagicCard[]> {
-    let toReturn: MagicCard[];
-    let qntd: number;
-
-    let pg: number = Math.floor(Math.random() * 20);
-
-    const found = await this.http.get('https://api.magicthegathering.io/v1/cards?types=Land&page=' + pg).toPromise();
-
-    toReturn = found.json().cards as MagicCard[];
-
-    return toReturn;
-  }
-
-  private async BuscaLand( toSearch: string ): Promise<MagicCard> {
-    let toReturn: MagicCard;
-    let qntd: number;
-    let aux: string [] = toSearch.split(' ');
-
-    aux = aux.slice(1);
-    toSearch = aux.join(' ');
-
-    let found = await this.http.get('https://api.magicthegathering.io/v1/cards?name=' + toSearch).toPromise();
-
-    toReturn = found.json().cards[0];
-
-    return toReturn;
-  }
 
   private toRelevantText( originalText: string ): string{
 
@@ -97,8 +66,9 @@ export class LandsComponent implements OnInit {
 
       originalText = originalText.slice( originalText.indexOf( auxString ) + auxString.length );
       //so da push se tiver um texto maior que dois para evitar adicionar entradas que nao gerem mana nenhuma
-      if(auxString.length>2)
+      if( auxString.length>2 ) {
         asw.push(auxString);
+      }
     }
 
     for(let i in asw){
@@ -127,8 +97,6 @@ export class LandsComponent implements OnInit {
         if( asw[i].toLowerCase().includes('{c}') && acumulador.length <= 0 ) {
           acumulador='C';
         }
-        // console.log("acumulador");
-        // console.log(acumulador);
         aswOut=acumulador.toLowerCase();
         acumulador='';
       }
@@ -139,34 +107,24 @@ export class LandsComponent implements OnInit {
   private async Rodada(){
 
     let textos: string;
-    let landsDaRodada: MagicDeck[] = [];
+    let lands: MagicDeck[] = [];
     let landAux: string[];
-    this.k=!this.k;
 
-    let colorId: string = '';
+    let symbolCount: Array<number[]> =
+      [
+       [ 0, 0, 0, 0, 0, 0 ],
+       [ 0, 0, 0, 0, 0, 0 ],
+       [ 0, 0, 0, 0, 0, 0 ],
+       [ 0, 0, 0, 0, 0, 0 ],
+       [ 0, 0, 0, 0, 0, 0 ],
+       [ 0, 0, 0, 0, 0, 0 ]
+     ];
 
-    for (let i of this.deckList.comanderCard.colorIdentity){
-      colorId += i;
-    }
+    lands = this.landsInput;
 
-
-    let symbolCount: Array<number[]> = [
-      [ 0, 0, 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0, 0, 0 ]
-    ];
-
-    landsDaRodada = this.deckList.deckLands;
-
-    for(let i of landsDaRodada) {
+    for(let i of lands) {
       if(!i.card.type.toLowerCase().includes('basic') ) {
         textos = this.toRelevantText(i.card.text);
-        // console.log(i.card.name);
-        // console.log('textos');
-        // console.log(textos);
 
         if(textos != undefined) {
           if(textos.includes('w')){
@@ -215,35 +173,26 @@ export class LandsComponent implements OnInit {
         if(i.card.name.toLowerCase().includes('waste')){
           symbolCount[5][5]+=i.qntd;
         }
-        // console.log('symCont');
-        // console.log(symbolCount);
-      }
-    }// fim do for
-    this.doughnutChartData = symbolCount;
-
-    // alert(colorId);
-    if(!colorId.toLowerCase().includes('w')){
+      }//fim do else
+    }// fim do for para cada land da rodada
+    //serie de ifs para que no lands count nao apareca as cores que o comandante nao tem
+    if(!this.colorId.toLowerCase().includes('w')){
       symbolCount[0][0]=0;
     }
-    if(!colorId.toLowerCase().includes('u')){
+    if(!this.colorId.toLowerCase().includes('u')){
       symbolCount[1][1]=0;
     }
-    if(!colorId.toLowerCase().includes('b')){
+    if(!this.colorId.toLowerCase().includes('b')){
       symbolCount[2][2]=0;
     }
-    if(!colorId.toLowerCase().includes('r')){
+    if(!this.colorId.toLowerCase().includes('r')){
       symbolCount[3][3]=0;
     }
-    if(!colorId.toLowerCase().includes('g')){
+    if(!this.colorId.toLowerCase().includes('g')){
       symbolCount[4][4]=0;
     }
 
-
-    // console.log(symbolCount);
-  }
-
-  public getPct():number {
-    return this.pct;
+    this.doughnutChartData = symbolCount;
   }
 
   // events

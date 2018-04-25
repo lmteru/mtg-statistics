@@ -18,7 +18,7 @@ export class DeckListService {
   progressBar: number = 0;
   deckSaved: boolean = false;
 
-
+  colorId='';
 
   constructor( private http:Http ) { }
 
@@ -32,22 +32,21 @@ export class DeckListService {
     for( let i of this.deckString ){
 
       if( !i.includes('LANDS') && !i.includes('CREATURES') && !i.includes('COMMANDER')
-        && !i.includes('INSTANTS and SORC') && !i.includes('OTHER SPELLS') ) {
+        && !i.includes('INSTANTS and SORC') && !i.includes('OTHER SPELLS') && i!='' ) {
 
         auxCard = await this.BuscaCarta(i) as MagicDeck;
+
         this.deckCard.push(auxCard);
-        // console.log(auxCard);
         contador++;
         this.progressBar = Math.floor( (contador / tam) * 100 );
-
       } else {
 
         tam--;
-
       }
     }//fim do for
 
     this.arrumaDeck();
+
     if(this.deckString.length > 0)
       this.deckSaved = true;
   }//fim do metodo
@@ -64,7 +63,8 @@ export class DeckListService {
     aux = aux.slice(1);
     toSearch = aux.join(' ');
 
-    let found = await this.http.get('https://api.magicthegathering.io/v1/cards?name=' + toSearch).toPromise();
+    let found = await this.http.get('https://api.magicthegathering.io/v1/cards?name=' + toSearch
+    + '&layout=normal|split|flip|double-faced').toPromise();
 
     toReturn.card = found.json().cards[0];
 
@@ -77,15 +77,25 @@ export class DeckListService {
     //coloca o comandante na variavel
     this.comanderCard = this.deckCard[0].card;
 
+    //tira o comandante do corpo do deck
     this.deckCard = this.deckCard.slice(1);
 
+    //coloca as lands no vetor de lands
     for(let land of this.deckCard){
       if(land.card.type.toLowerCase().includes('land'))
         this.deckLands.push(land);
     }
 
-    // console.log(this.deckCard);
-    // console.log(this.comanderCard);
-    // console.log(this.deckLands);
+    this.colorId = this.getColorId()
+  }
+
+  private getColorId(): string {
+    let concat: string = '';
+    if(this.comanderCard!=undefined)
+      for (let i of this.comanderCard.colorIdentity){
+        concat += i;
+      }
+
+    return concat
   }
 }

@@ -1,5 +1,6 @@
+import { MagicDeck } from './../shared/MagicCard';
 import { DeckListService } from './../shared/deck-list.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-mana-curve',
@@ -8,12 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManaCurveComponent implements OnInit {
 
-  constructor( private decklist: DeckListService ) { }
+  constructor( ) { }
 
+  @Input('deckList') deckList: MagicDeck[];
+  
   cmcArray: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   ngOnInit() {
-    for ( let i of this.decklist.deckCard ) {
+    for ( let i of  this.deckList) {
       if( !i.card.type.includes("Land") ){
         if(i.card.cmc <= 10){
           this.cmcArray[i.card.cmc]++;
@@ -28,29 +31,13 @@ export class ManaCurveComponent implements OnInit {
   public lineChartData:Array<any> = [
     {data: this.cmcArray, label: 'Quantidade'}
   ];
-  public lineChartLabels:Array<any> = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'];
+  public lineChartLabels:Array<string> = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'];
   public lineChartOptions:any = {
     responsive: true
   };
   public lineChartColors:Array<any> = [
     { // cor de fundo do quadrado
       backgroundColor: 'rgba(0, 0, 25, 0.75)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: ' #ff6666',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: ' #3333cc',
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#fff',

@@ -1,6 +1,7 @@
+import { MagicDeck } from './../shared/MagicCard';
 import { Color } from 'ng2-charts';
 import { DeckListService } from './../shared/deck-list.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tipo-carta',
@@ -9,11 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TipoCartaComponent implements OnInit {
 
-  constructor(private decklist: DeckListService) { }
+  constructor( ) { }
   // Radar
   public radarChartLabels: string[] = [
     'LANDS', 'CREATURES', 'ENCHANTMENTS', 'ARTIFACTS', 'PLANESWALKERS', 'SORCERIES', 'INSTANTS'
   ];
+
+  @Input('deckList') deckList: MagicDeck[];
 
   public radarChartData: any = [{
     data: [0, 0, 0, 0, 0, 0, 0],
@@ -22,9 +25,9 @@ export class TipoCartaComponent implements OnInit {
 
   public radarChartType: string = 'radar';
 
-  public colors: Array<any> = [
+  public colors: Array<Color> = [
     {
-      borderColor: 'rgba(0, 0, 0, 0.5)',
+      borderColor: 'rgba(0, 0, 0, 0)',
       backgroundColor: 'rgba(0, 0, 25, 0.3)',
       pointBackgroundColor: 'rgba(0, 0, 0, 1)'
     }
@@ -42,27 +45,28 @@ export class TipoCartaComponent implements OnInit {
   ngOnInit() {
     let auxString: string[];
     let tipo: string;
-    for (let i of this.decklist.deckCard) {
+
+    for (let i of this.deckList) {
       tipo = i.card.type.toLowerCase();
-      if (tipo.includes('land')) {
+      if (tipo.toLowerCase().includes('land')) {
         this.radarChartData[0].data[0]++;
       }
-      if (tipo.includes('creature')) {
+      if (tipo.toLowerCase().includes('creature')) {
         this.radarChartData[0].data[1]++;
       }
-      if (tipo.includes('enchantment')) {
+      if (tipo.toLowerCase().includes('enchantment')) {
         this.radarChartData[0].data[2]++;
       }
-      if (tipo.includes('artifact')) {
+      if (tipo.toLowerCase().includes('artifact')) {
         this.radarChartData[0].data[3]++;
       }
-      if (tipo.includes('planeswalker')) {
+      if (tipo.toLowerCase().includes('planeswalker')) {
         this.radarChartData[0].data[4]++;
       }
-      if (tipo.includes('sorcer')) {
+      if (tipo.toLowerCase().includes('sorcer')) {
         this.radarChartData[0].data[5]++;
       }
-      if (tipo.includes('instant')) {
+      if (tipo.toLowerCase().includes('instant')) {
         this.radarChartData[0].data[6]++;
       }
     }//fim do for

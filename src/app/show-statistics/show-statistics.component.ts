@@ -1,3 +1,5 @@
+import { MagicDeck } from './../shared/MagicCard';
+import { DeckListService } from './../shared/deck-list.service';
 import { StatisticsService } from './../shared/statistics.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowStatisticsComponent implements OnInit {
 
-  constructor( private statistics: StatisticsService ) { }
+  constructor( private statistics: StatisticsService, private deckList: DeckListService ) { }
 
   cmcTotal: number;
   cmcMedio: number;
@@ -19,5 +21,4 @@ export class ShowStatisticsComponent implements OnInit {
     this.cmcMedio = this.statistics.cmcMedio();
     this.total = this.statistics.totalCards();
   }
-
 }
