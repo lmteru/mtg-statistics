@@ -13,27 +13,27 @@
 <br>
 
 <app-wrapper>
-  <app-mana-curve [deckList]='deckList.deckCard' ></app-mana-curve>
+  <app-mana-curve [deckList]='show' ></app-mana-curve>
   <br>
 </app-wrapper>
 <br>
 
 <app-wrapper>
-  <app-custo-cores [deckList]='deckList.deckCard' ></app-custo-cores>
+  <app-custo-cores [deckList]='show' ></app-custo-cores>
   <br>
 </app-wrapper>
 
 <br>
 
 <app-wrapper>
-  <app-tipo-carta [deckList]='deckList.deckCard' ></app-tipo-carta>
+  <app-tipo-carta [deckList]='show' ></app-tipo-carta>
   <br>
 </app-wrapper>
 <br>
 
 
 <app-wrapper>
-  <app-lands [landsInput] = 'deckList.deckLands' [colorId] = 'deckList.colorId'>
+  <app-lands [landsInput] = 'show' [colorId] = 'cmdColor'>
   </app-lands>
   <br>
 </app-wrapper>

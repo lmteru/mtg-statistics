@@ -15,10 +15,14 @@ export class ShowStatisticsComponent implements OnInit {
   cmcTotal: number;
   cmcMedio: number;
   total:number;
+  show: MagicDeck[];
+  cmdColor: string;
 
   ngOnInit() {
     this.cmcTotal = this.statistics.cmcTotal();
     this.cmcMedio = this.statistics.cmcMedio();
     this.total = this.statistics.totalCards();
+    this.show = this.deckList.deckCard;
+    this.cmdColor = this.deckList.colorId;
   }
 }
