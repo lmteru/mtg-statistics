@@ -47,15 +47,16 @@ export class DeckListService {
 
     this.arrumaDeck();
 
-    if(this.deckString.length > 0)
+    if(this.deckString.length > 0){
       this.deckSaved = true;
+      //AdicionarDeck( this.deckCard, this.comanderCard );
+    }
   }//fim do metodo
 
   async BuscaCarta( toSearch: string ): Promise<MagicDeck> {
     let toReturn: MagicDeck = { qntd: 0, card:{} };
     let qntd: number;
     let aux: string [] = [];
-
 
     aux = toSearch.split(' ');
     toReturn.qntd = Number(aux[0]);
